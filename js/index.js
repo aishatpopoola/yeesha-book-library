@@ -3,10 +3,17 @@
 //   body.innerHTML = '<h2>JAVASCRIPT ENABLED</h2>';
 // };
 
-// startApp(); 
+// startApp();
 
-const bookList = [];
+const bookList = [
+  { id: '1', title: 'shadow hunter', author: 'clary' },
+  { id: '2', title: 'book2', author: 'jamiu' },
+  { id: '3', title: 'book2', author: 'jamiu' },
+  { id: '4', title: 'book3', author: 'basitah' },
+  { id: '5', title: 'book4', author: 'yakeen' },
+];
 const bookForm = document.querySelector('#add_book_form');
+const bookContainer = document.querySelector('#book_container');
 
 const dynamicId = () => {
   const a = '';
@@ -21,13 +28,11 @@ const dynamicId = () => {
   return id;
 };
 
-
 const addBook = (e) => {
   e.preventDefault();
-
   const bookFormInputs = document.querySelectorAll('.book_form_values');
   const bookId = dynamicId();
-  const newBook = {id: bookId, title: '', author: '' };
+  const newBook = { id: bookId, title: '', author: '' };
   bookFormInputs.forEach(input => {
     if (input.id === 'title') {
       newBook.title = input.value;
@@ -39,20 +44,30 @@ const addBook = (e) => {
   bookForm.reset();
 };
 
-// const dummyLib = [
-//   {id: '1', title: "shadow hunter", author: "clary"},
-//   {id: '2', title: "book2", author: "jamiu"},
-//   {id: '3', title: "book2", author: "jamiu"},
-//   {id: '4', title: "book3", author: "basitah"},
-//   {id: '5', title: "book4", author: "yakeen"},
-// ]
+const displayBookOnUi = ({ title, author, id }) => {
+  const newBookElement = document.createElement('li');
+  newBookElement.className = 'book-list-item';
+  newBookElement.innerHTML = `
+    <div class="book_element_info" id="book_div_${id}">
+      <h2>${title}</h2>
+      <p>${author}</p>
+      <button type="button" id="remove_book_${id}" data-remove-book="book_div_${id}">Remove</button>
+    </div>
+  `;
+  // newBookElement.addEventListener('click', displayBookOnUi.bind(null, id));
+  bookContainer.append(newBookElement);
+};
 
-// const remove_book_2 = document.querySelector('#remove_book_2');
+const allBookCollection = () => {
+  bookList.forEach(element => {
+    displayBookOnUi(element);
+  });
+};
+
 const removeBook = (id) => {
   const bookToRemove = bookList.filter((book) => book.id === id);
-  console.log(bookToRemove[0]);
-}
+};
 
 bookForm.addEventListener('submit', addBook);
-// remove_book_2.addEventListener('click', removeBook);
 
+allBookCollection();

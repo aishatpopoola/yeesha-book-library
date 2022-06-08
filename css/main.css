@@ -1,9 +1,12 @@
 .book {
   width: 100%;
-  border-bottom: 1px solid black;
-  margin-bottom: 30px;
   padding: 10px;
-  padding-top: 0;
+}
+
+.book-list-item,
+.book {
+  padding-bottom: 30px;
+  border-bottom: 1px solid black;
 }
 
 h1 {
