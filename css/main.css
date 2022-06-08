@@ -1,0 +1,19 @@
+.book {
+  width: 100%;
+  border-bottom: 1px solid black;
+  margin-bottom: 30px;
+  padding: 10px;
+  padding-top: 0;
+}
+
+h1 {
+  margin-bottom: 0;
+}
+
+.form-control {
+  margin-bottom: 20px;
+}
+
+.button {
+  margin-top: 20px;
+}
