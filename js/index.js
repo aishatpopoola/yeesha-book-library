@@ -6,7 +6,7 @@
 //   { id: '5', title: 'book5', author: 'yakeen' },
 // ];
 
-// const bookList = [];
+let bookList = [];
 
 const bookForm = document.querySelector('#add_book_form');
 const bookContainer = document.querySelector('#book_container');
@@ -33,23 +33,29 @@ const dynamicId = () => {
   return id;
 };
 
-const removeBookFunc = (id) => {
-  const bookToRemove = bookList.filter((book) => book.id === id)[0];
+const removeBookFunc = id => {
+  const bookToRemove = bookList.filter(book => book.id === id)[0];
   const indexOfBook = bookList.indexOf(bookToRemove);
   bookList.splice(indexOfBook, 1);
-  localStorageDatabase.setItemToDatabase('books', bookList)
+  localStorageDatabase.setItemToDatabase('books', bookList);
 };
 
-const removeBookFromUi = (e) => {
-  e.preventDefault()
-  e.stopPropagation()
-  const {target: {classList, dataset:{ removeBook }}, currentTarget} = e
+const removeBookFromUi = e => {
+  e.preventDefault();
+  e.stopPropagation();
+  const {
+    target: {
+      classList,
+      dataset: { removeBook },
+    },
+    currentTarget,
+  } = e;
   if (classList.contains('remove_book_button')) {
-    bookContainer.removeChild(currentTarget)
+    bookContainer.removeChild(currentTarget);
   }
   const bookId = removeBook;
-  removeBookFunc(bookId)
-}
+  removeBookFunc(bookId);
+};
 
 const displayBookOnUi = ({ title, author, id }) => {
   const newBookElement = document.createElement('li');
@@ -66,7 +72,7 @@ const displayBookOnUi = ({ title, author, id }) => {
   bookContainer.append(newBookElement);
 };
 
-const addBook = (e) => {
+const addBook = e => {
   e.preventDefault();
   const bookFormInputs = document.querySelectorAll('.book_form_values');
   const bookId = dynamicId();
@@ -79,8 +85,8 @@ const addBook = (e) => {
     }
   });
   bookList.push(newBook);
-  displayBookOnUi(newBook)
-  localStorageDatabase.setItemToDatabase('books', bookList)
+  displayBookOnUi(newBook);
+  localStorageDatabase.setItemToDatabase('books', bookList);
   bookForm.reset();
 };
 
@@ -93,8 +99,8 @@ const allBookCollection = () => {
 
 const removeBookButtons = document.querySelectorAll('.remove_book_button');
 removeBookButtons.forEach(element => {
-  element.addEventListener('click', removeBookFromUi)
-})
+  element.addEventListener('click', removeBookFromUi);
+});
 
 bookForm.addEventListener('submit', addBook);
 
