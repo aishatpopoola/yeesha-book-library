@@ -1,0 +1,22 @@
+.book {
+  width: 100%;
+  padding: 10px;
+}
+
+.book-list-item,
+.book {
+  padding-bottom: 30px;
+  border-bottom: 1px solid black;
+}
+
+h1 {
+  margin-bottom: 0;
+}
+
+.form-control {
+  margin-bottom: 20px;
+}
+
+.button {
+  margin-top: 20px;
+}
